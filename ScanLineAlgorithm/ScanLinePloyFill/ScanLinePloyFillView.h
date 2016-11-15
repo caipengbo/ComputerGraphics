@@ -2,11 +2,18 @@
 // ScanLinePloyFillView.h : CScanLinePloyFillView 类的接口
 //
 
+#include<algorithm>
+#include <vector>
+#include<list>
+#include <iterator>
+#include<iostream>
+using namespace std;
+
 #pragma once
 //边结构
 struct Edge {
 	int ymax;
-	int x;//最低点的x
+	float x;//最低点的x
 	float m;//斜率的倒数
 	//Edge * next;
 };
@@ -52,7 +59,12 @@ protected:
 public:
 	CPoint vertex[100];
 	int vertexNum;
+	vector<list<Edge>> createNET(CPoint point[], int num, int& ymax, int& ymin);
+	list<Edge> creatAET(int y,vector<list<Edge>> NET,int ymin,list<Edge> oldAET,CDC* pDC);
+	void ployFill(CPoint point[], int num,CDC* pDC);
+	bool flag;
 	afx_msg void OnLButtonDown(UINT nFlags, CPoint point);
+	afx_msg void OnRButtonDown(UINT nFlags, CPoint point);
 };
 
 #ifndef _DEBUG  // ScanLinePloyFillView.cpp 中的调试版本
