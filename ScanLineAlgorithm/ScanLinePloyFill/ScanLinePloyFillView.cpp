@@ -31,6 +31,7 @@ BEGIN_MESSAGE_MAP(CScanLinePloyFillView, CView)
 	ON_WM_RBUTTONUP()
 	ON_WM_LBUTTONDOWN()
 	ON_WM_RBUTTONDOWN()
+	ON_COMMAND(ID_CLEAR, &CScanLinePloyFillView::OnClear)
 END_MESSAGE_MAP()
 
 // CScanLinePloyFillView 构造/析构
@@ -126,11 +127,11 @@ void CScanLinePloyFillView::OnEndPrinting(CDC* /*pDC*/, CPrintInfo* /*pInfo*/)
 {
 	// TODO: 添加打印后进行的清理过程
 }
-
-void CScanLinePloyFillView::OnRButtonUp(UINT /* nFlags */, CPoint point)
+/**/
+void CScanLinePloyFillView::OnRButtonUp(UINT  nFlags , CPoint point)
 {
-//	ClientToScreen(&point);
-	OnContextMenu(this, point);
+	//ClientToScreen(&point);
+	//OnContextMenu(this, point);
 }
 
 void CScanLinePloyFillView::OnContextMenu(CWnd* /* pWnd */, CPoint point)
@@ -222,7 +223,7 @@ vector<list<Edge>> CScanLinePloyFillView::createNET(CPoint point[], int num, int
 				isdispose = true;
 		}
 		newedge.ymax = top.y;
-		newedge.x = bottom.x;
+		newedge.x = (float)bottom.x;
 		newedge.m = (float)(top.x - bottom.x)/(float)(top.y - bottom.y);
 		//if(panduan)newedge.ymax;;int 改变
 		int subscript;// 求新边要插入的下标
@@ -304,4 +305,13 @@ void CScanLinePloyFillView::OnRButtonDown(UINT nFlags, CPoint point)
 	flag = true;
 	Invalidate(TRUE);
 	CView::OnRButtonDown(nFlags, point);
+}
+
+
+void CScanLinePloyFillView::OnClear()
+{
+	// TODO: Add your command handler code here
+	flag = false;
+	vertexNum = 0;
+	Invalidate(TRUE);
 }
