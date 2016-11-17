@@ -43,6 +43,18 @@ protected:
 	afx_msg void OnRButtonUp(UINT nFlags, CPoint point);
 	afx_msg void OnContextMenu(CWnd* pWnd, CPoint point);
 	DECLARE_MESSAGE_MAP()
+public:
+	int encode(CPoint point, int xl, int xr, int yb, int yt);
+	void displayLine(CPoint pointA, CPoint pointB, COLORREF color, CDC* pDC);
+	void SC_LineClip(CPoint pointA, CPoint pointB, int xl, int xr, int yb, int yt, CDC* pDC);
+	int vertexNum;
+	CPoint clickedpoint[2];
+	bool ClipT(float p,float q,float& u1,float& u2);
+	void LB_LineClip(CPoint pointA,CPoint pointB, int xl, int xr, int yb, int yt,CDC* pDC);
+	int flag;
+	afx_msg void OnLButtonDown(UINT nFlags, CPoint point);
+	afx_msg void OnCs();
+	afx_msg void OnLb();
 };
 
 #ifndef _DEBUG  // debug version in LineClipView.cpp
